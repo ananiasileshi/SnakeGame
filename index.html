@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <main class="game-main">
+            <div class="game-board-container">
+                <canvas id="game-board" class="game-board"></canvas>
+                <div class="game-overlay" id="game-overlay">
+                    <div class="overlay-content">
+                        <h2 class="overlay-title" id="overlay-title">READY TO PLAY?</h2>
+                        <p class="overlay-message" id="overlay-message">Press START GAME to begin</p>
+                        <button class="play-button" id="play-button">START GAME</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <header class="game-header">
+                    <h1 class="game-title">🐍 SNAKE GAME</h1>
+                    <div class="score-board">
+                        <div class="score-item">
+                            <span class="score-label">SCORE</span>
+                            <span class="score-value" id="current-score">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">HIGH</span>
+                            <span class="score-value" id="high-score">0</span>
+                        </div>
+                    </div>
+                </header>
+                <div class="control-buttons">
+                    <button class="control-btn" id="pause-btn">⏸️ PAUSE</button>
+                    <button class="control-btn" id="restart-btn">🔄 RESTART</button>
+                </div>
+                <div class="mobile-controls">
+                    <div class="control-row">
+                        <button class="arrow-btn" id="up-btn">↑</button>
+                    </div>
+                    <div class="control-row">
+                        <button class="arrow-btn" id="left-btn">←</button>
+                        <button class="arrow-btn" id="down-btn">↓</button>
+                        <button class="arrow-btn" id="right-btn">→</button>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <p><strong>Start:</strong> Press START GAME button</p>
+                    <p><strong>Move:</strong> Use ARROW KEYS or WASD</p>
+                    <p><strong>Mobile:</strong> Use the on-screen buttons</p>
+                    <p><strong>Pause:</strong> Press SPACE or P</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
