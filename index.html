@@ -1,64 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smooth Snake Game</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>NEON SERPENT</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <main class="game-main">
-            <div class="game-board-container">
-                <canvas id="game-board" class="game-board"></canvas>
-                <div class="game-overlay" id="game-overlay">
-                    <div class="overlay-content">
-                        <h2 class="overlay-title" id="overlay-title">READY TO PLAY?</h2>
-                        <p class="overlay-message" id="overlay-message">Press START GAME to begin</p>
-                        <button class="play-button" id="play-button">START GAME</button>
-                    </div>
-                </div>
-            </div>
+<main class="cabinet">
+  <header class="marquee">
+    <div class="marquee-art"><canvas id="marquee" width="168" height="36"></canvas></div>
+  </header>
 
-            <div class="controls">
-                <header class="game-header">
-                    <h1 class="game-title">🐍 SNAKE GAME</h1>
-                    <div class="score-board">
-                        <div class="score-item">
-                            <span class="score-label">SCORE</span>
-                            <span class="score-value" id="current-score">0</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="score-label">HIGH</span>
-                            <span class="score-value" id="high-score">0</span>
-                        </div>
-                    </div>
-                </header>
-                <div class="control-buttons">
-                    <button class="control-btn" id="pause-btn">⏸️ PAUSE</button>
-                    <button class="control-btn" id="restart-btn">🔄 RESTART</button>
-                </div>
-                <div class="mobile-controls">
-                    <div class="control-row">
-                        <button class="arrow-btn" id="up-btn">↑</button>
-                    </div>
-                    <div class="control-row">
-                        <button class="arrow-btn" id="left-btn">←</button>
-                        <button class="arrow-btn" id="down-btn">↓</button>
-                        <button class="arrow-btn" id="right-btn">→</button>
-                    </div>
-                </div>
-                <div class="instructions">
-                    <p><strong>Start:</strong> Press START GAME button</p>
-                    <p><strong>Move:</strong> Use ARROW KEYS or WASD</p>
-                    <p><strong>Mobile:</strong> Use the on-screen buttons</p>
-                    <p><strong>Pause:</strong> Press SPACE or P</p>
-                </div>
-            </div>
-        </main>
+  <section class="bezel">
+    <div class="bezel-print top"><span>1 PLAYER</span><span>HIGH SCORE SAVING</span></div>
+    <div class="screen" id="screen">
+      <canvas id="gl"></canvas>
+      <div class="glass"></div>
     </div>
+    <div class="bezel-print bottom"><span>JOYSTICK — MOVE</span><span>A — START</span><span>B — REWIND</span></div>
+  </section>
 
-    <script src="script.js"></script>
+  <section class="panel">
+    <div class="panel-top">
+      <div class="stick-zone">
+        <div class="stick" id="stick"><div class="gate"></div><div class="shaft"></div><div class="ball" id="ball"></div></div>
+      </div>
+
+      <div class="card">
+        <b>HOW TO PLAY</b>
+        <ol>
+          <li>Eat berries. Bite again fast to chain combos up to ×8.</li>
+          <li>Every 5 bites, choose a power.</li>
+          <li>Grab clocks. When you crash, push B to rewind 3 seconds.</li>
+        </ol>
+      </div>
+
+      <div class="buttons">
+        <div class="btn-wrap"><button class="btn red" data-act="a" aria-label="A / Start"></button><label>A<br><small>START</small></label></div>
+        <div class="btn-wrap"><button class="btn yellow" data-act="b" aria-label="B / Rewind"></button><label>B<br><small>REWIND</small></label></div>
+      </div>
+    </div>
+    <div class="panel-front">
+      <button class="small-btn" data-act="pause">PAUSE</button>
+      <button class="small-btn" data-act="back">BACK</button>
+    </div>
+  </section>
+
+  <section class="coin-door">
+    <div class="slot"><button class="coin-btn" data-act="coin" aria-label="Insert coin">25¢</button><span>INSERT COIN</span></div>
+    <div class="door-plate">
+      <span class="plate-line">NO. 0026-NS</span>
+      <button class="service" data-act="service">SERVICE</button>
+    </div>
+    <div class="slot"><button class="coin-btn" data-act="coin" aria-label="Insert coin">25¢</button><span>INSERT COIN</span></div>
+  </section>
+</main>
+
+<p class="footnote">Arrows/WASD · Enter = A · X or R = B · 5 = coin · Esc = back · S share replay · F2 service · V CPU cycle · ` debug</p>
+
+<div class="debug hidden" id="debug">
+  <canvas id="dbg-graph" width="240" height="48"></canvas>
+  <pre id="dbg-text"></pre>
+</div>
+
+<script type="module">
+  // marquee: same bitmap font, printed look
+  import { text } from './src/font.js';
+  const c = document.getElementById('marquee'), x = c.getContext('2d');
+  text(x, 'NEON', 84 + 1, 3 + 1, '#3a0505', { scale: 2, align: 'c' }); text(x, 'NEON', 84, 3, '#d81e1e', { scale: 2, align: 'c' });
+  text(x, 'SERPENT', 84 + 1, 20 + 1, '#04300a', { scale: 2, align: 'c' }); text(x, 'SERPENT', 84, 20, '#118a2c', { scale: 2, align: 'c' });
+</script>
+<script type="module" src="src/main.js"></script>
 </body>
 </html>
